@@ -44,5 +44,7 @@ jobs:
         shell: powershell
         run: |
           .\backend-test\.sonar\scanner\dotnet-sonarscanner begin /k:"Andritz-Digital-Factory_sonar-two-codebase-test" /o:"andritz-digital-factory" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
-          dotnet build
+            pushd .backend-test
+            dotnet build
+            popd
           .\backend-test\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
