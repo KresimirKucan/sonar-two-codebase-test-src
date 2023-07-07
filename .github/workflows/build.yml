@@ -65,6 +65,7 @@ jobs:
 
       - name: Build
         run: |
+          pwd
           cd ../frontend-test
           npm run build
 
