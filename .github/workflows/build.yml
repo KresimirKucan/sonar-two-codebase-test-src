@@ -64,14 +64,13 @@ jobs:
         run: | 
             pwd
             dir
-            cd ../frontend-test
+            cd ./frontend-test
             npm ci
 
       - name: Build
         run: |
           pwd
-          ls -al
-          cd ../frontend-test
+          cd ./frontend-test
           npm run build
 
       - name: SonarCloud Scan
