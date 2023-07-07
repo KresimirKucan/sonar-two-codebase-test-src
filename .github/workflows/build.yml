@@ -72,7 +72,6 @@ jobs:
           pwd
           cd ./frontend-test
           npm run build
-          sonar-runner -Dproject.settings=./sonar-project.properties
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
