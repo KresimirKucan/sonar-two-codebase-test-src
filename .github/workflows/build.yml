@@ -70,11 +70,11 @@ jobs:
 
           # SonarScanner analysis for Angular
           npm install -g sonarqube-scanner
-          sonar-scanner \
-            -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
-            -D"sonar.organization=andritz-digital-factory" \
-            -D"sonar.sources=src" \
-            -D"sonar.exclusions=**/*.spec.ts" \
-            -D"sonar.sourceEncoding=UTF-8" \
-            -D"sonar.host.url=https://sonarcloud.io" \
+          sonar-scanner 
+            -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" 
+            -D"sonar.organization=andritz-digital-factory" 
+            -D"sonar.sources=src" 
+            -D"sonar.exclusions=**/*.spec.ts" 
+            -D"sonar.sourceEncoding=UTF-8" 
+            -D"sonar.host.url=https://sonarcloud.io" 
             -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
