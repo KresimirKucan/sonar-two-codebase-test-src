@@ -70,7 +70,7 @@ jobs:
 
           # SonarScanner analysis for Angular
           npm install sonar-scanner
-          sonar-scanner 
+          sonar-scanner \
             -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
             -D"sonar.organization=andritz-digital-factory" \
             -D"sonar.sources=src" \
