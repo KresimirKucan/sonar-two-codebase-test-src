@@ -59,10 +59,25 @@ jobs:
           cd frontend-test
           npm ci
 
-      - name: Build
-        run: | 
+      - name: Build and analyze Frontend
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        shell: powershell
+        run: |
           cd frontend-test
           npm run build
+
+          # SonarScanner analysis for Angular
+          npm install -g sonarqube-scanner
+          sonar-scanner \
+            -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
+            -D"sonar.organization=andritz-digital-factory" \
+            -D"sonar.sources=src" \
+            -D"sonar.exclusions=**/*.spec.ts" \
+            -D"sonar.sourceEncoding=UTF-8" \
+            -D"sonar.host.url=https://sonarcloud.io" \
+            -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v1
