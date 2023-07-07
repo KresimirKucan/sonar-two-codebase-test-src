@@ -71,6 +71,7 @@ jobs:
           Invoke-WebRequest -Uri https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip -OutFile sonar-scanner.zip
           Expand-Archive -Path sonar-scanner.zip -DestinationPath .\sonar-scanner
           Remove-Item -Path sonar-scanner.zip
+          cd frontend-test
           .\sonar-scanner\bin\sonar-scanner.bat \
             -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
             -D"sonar.organization=andritz-digital-factory" \
