@@ -48,6 +48,7 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Andritz-Digital-Factory_sonar-two-codebase-test" /o:"andritz-digital-factory" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+          
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -58,27 +59,13 @@ jobs:
           cd frontend-test
           npm ci
 
-      - name: Build and analyze Frontend
+      - name: Build
+        run: | 
+          cd frontend-test
+          npm run build
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        shell: powershell
-        run: |
-          cd frontend-test
-          npm run build
-          
-          # SonarScanner analysis
-          Invoke-WebRequest -Uri https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.6.2.2472-windows.zip -OutFile sonar-scanner.zip
-          Expand-Archive -Path sonar-scanner.zip -DestinationPath .\sonar-scanner
-          Remove-Item -Path sonar-scanner.zip
-          echo "Current Folder Position: $PWD"
-          .\frontend-test\sonar-scanner\bin\sonar-scanner.bat \
-            -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
-            -D"sonar.organization=andritz-digital-factory" \
-            -D"sonar.sources=src" \
-            -D"sonar.exclusions=**/*.spec.ts" \
-            -D"sonar.tests=src" \
-            -D"sonar.test.inclusions=**/*.spec.ts" \
-            -D"sonar.sourceEncoding=UTF-8" \
-            -D"sonar.host.url=https://sonarcloud.io" \
-            -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
