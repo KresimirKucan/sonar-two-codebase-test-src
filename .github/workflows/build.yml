@@ -48,7 +48,10 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner begin /k:"Andritz-Digital-Factory_sonar-two-codebase-test" /o:"andritz-digital-factory" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
           dotnet build
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
-          
+  build-frontend:
+    name: Build and analyze frontend
+    runs-on: windows-latest
+    steps:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
@@ -56,8 +59,8 @@ jobs:
 
       - name: Install Dependencies
         run: | 
-          cd frontend-test
-          npm ci
+            cd frontend-test
+            npm ci
 
       - name: Build and analyze Frontend
         env:
@@ -65,16 +68,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         shell: powershell
         run: |
-          cd frontend-test
-          npm run build
+            cd frontend-test
+            npm run build
 
-          # SonarScanner analysis for Angular
-          npm install sonarqube-scanner
-          sonar-scanner \
-            -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
-            -D"sonar.organization=andritz-digital-factory" \
-            -D"sonar.sources=src" \
-            -D"sonar.exclusions=**/*.spec.ts" \ 
-            -D"sonar.sourceEncoding=UTF-8" \
-            -D"sonar.host.url=https://sonarcloud.io" \ 
-            -D"sonar.login=${{ secrets.SONAR_TOKEN }}"
