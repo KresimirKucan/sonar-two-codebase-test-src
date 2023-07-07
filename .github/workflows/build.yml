@@ -69,7 +69,7 @@ jobs:
           npm run build
 
           # SonarScanner analysis for Angular
-          npm install sonar-scanner
+          npm install sonarqube-scanner
           sonar-scanner \
             -D"sonar.projectKey=Andritz-Digital-Factory_sonar-two-codebase-test" \
             -D"sonar.organization=andritz-digital-factory" \
