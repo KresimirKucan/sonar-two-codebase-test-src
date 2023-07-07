@@ -50,7 +50,7 @@ jobs:
           .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
   build-frontend:
     name: Build and analyze frontend
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -60,7 +60,7 @@ jobs:
       - name: Install Dependencies
         run: | 
             pwd
-            ls -al
+            dir
             cd ../frontend-test
             npm ci
 
