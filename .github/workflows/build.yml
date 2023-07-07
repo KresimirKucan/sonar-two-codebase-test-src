@@ -60,12 +60,14 @@ jobs:
       - name: Install Dependencies
         run: | 
             pwd
+            ls -al
             cd ../frontend-test
             npm ci
 
       - name: Build
         run: |
           pwd
+          ls -al
           cd ../frontend-test
           npm run build
 
