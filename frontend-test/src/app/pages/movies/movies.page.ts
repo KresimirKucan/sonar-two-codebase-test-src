@@ -16,6 +16,7 @@ export class MoviesPage implements OnInit {
   cars: Car[] = [];
   currentPage = 1;
   imageBaseUrl = environment.images;
+  testVariable : any;
 
   constructor(
     private movieService: MovieService,
