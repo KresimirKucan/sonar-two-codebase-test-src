@@ -12,5 +12,6 @@ namespace MovieAppServer.Models
         public int HorsePower { get; set; }
         public int Year { get; set; }
         public int Kilometer { get; set; }
+        public int TestProp { get; set; }
     }
 }
