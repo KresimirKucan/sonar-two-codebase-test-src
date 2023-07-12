@@ -13,5 +13,6 @@ namespace MovieAppServer.Models
         public int Year { get; set; }
         public int Kilometer { get; set; }
         public int TestProp { get; set; }
+        public int TestProp1 { get; set; }
     }
 }
